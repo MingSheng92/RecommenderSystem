@@ -1,7 +1,7 @@
 # Work in progress
 
 
-## RecommenderSystem
+## Recommender System
 
 Recommender system, as one of the subclasses of the information filtering system, is widely used in multiple industries. It excels at exploring and forecasting user preferences. In modern society, the rapid growth of E-Commerce business meaning that the recommender system will be an essential component for all online business platforms. For E-Commerce, it is a useful technique to help users make better decisions and enhance user loyalty. In the repository, we will proposed and implement a new model based on the exisiting autoencoder architecture. 
 
@@ -39,7 +39,7 @@ We have adopted the matrix factorization based algorithm (SVD), which is also eq
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=R_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i&space;&plus;&space;q_i^TP_u" target="_blank"><img src="https://latex.codecogs.com/gif.latex?R_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i&space;&plus;&space;q_i^TP_u" title="R_{ui} = \mu + b_u + b_i + q_i^TP_u" /></a>
 
-Where 𝝁 is the average rating, & is the user and item biased from the bu and bi global average, while is the vector that associated with each item i and each i user u associated with vector Pu (Y. Koren, R. Bell, and C. Volinsky, 2009). To estimate the unknown ratings we also adopt the following regularized squared error: 
+Where 𝝁 is the average rating, <a href="https://www.codecogs.com/eqnedit.php?latex=b_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b_i" title="b_i" /></a> & <a href="https://www.codecogs.com/eqnedit.php?latex=b_u" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b_u" title="b_u" /></a> is the user and item biased from global average, while is the vector that associated with each item i and each i user u associated with vector <a href="https://www.codecogs.com/eqnedit.php?latex=p_u" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p_u" title="p_u" /></a> (Y. Koren, R. Bell, and C. Volinsky, 2009). To estimate the unknown ratings we also adopt the following regularized squared error: 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{r_{ui}&space;\in&space;R_{train}}&space;(R_{io}(True)&space;-&space;R_{ui})^2&space;&plus;&space;\lambda(b_i^2&space;&plus;&space;b_u^2&space;&plus;&space;\left&space;\|&space;q_i&space;\right&space;\|^2&space;&plus;&space;\left&space;\|&space;p_u&space;\right&space;\|^2)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{r_{ui}&space;\in&space;R_{train}}&space;(R_{io}(True)&space;-&space;R_{ui})^2&space;&plus;&space;\lambda(b_i^2&space;&plus;&space;b_u^2&space;&plus;&space;\left&space;\|&space;q_i&space;\right&space;\|^2&space;&plus;&space;\left&space;\|&space;p_u&space;\right&space;\|^2)" title="\sum_{r_{ui} \in R_{train}} (R_{io}(True) - R_{ui})^2 + \lambda(b_i^2 + b_u^2 + \left \| q_i \right \|^2 + \left \| p_u \right \|^2)" /></a>
 
@@ -51,3 +51,33 @@ Then the minimization is performed with the following stochastic gradient descen
 <a href="https://www.codecogs.com/eqnedit.php?latex=p_u&space;&\leftarrow&space;p_u&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;q_i&space;-&space;\lambda&space;p_u)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p_u&space;&\leftarrow&space;p_u&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;q_i&space;-&space;\lambda&space;p_u)" title="p_u &\leftarrow p_u &+ \gamma (e_{ui} \cdot q_i - \lambda p_u)" /></a>
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=q_i&space;&\leftarrow&space;q_i&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;p_u&space;-&space;\lambda&space;q_i)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?q_i&space;&\leftarrow&space;q_i&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;p_u&space;-&space;\lambda&space;q_i)" title="q_i &\leftarrow q_i &+ \gamma (e_{ui} \cdot p_u - \lambda q_i)" /></a>
+
+For more information on the algorithm, you can read the official documentation page of surprise in [SVD](https://surprise.readthedocs.io/en/stable/matrix_factorization.html#)
+
+### Autoencoder 
+
+Autoencoder is widely used in denoising and decompression of image data, recently different variation of autoencoder has also been used as a generative model to generate sentences or even artwork (Jun-Yan Zhu, TaesungPark,Isola, P., & Efros, A. 2017).  
+Similar to matrix factorization, autoencoder will try to learn the function : <br/>
+<a href="https://www.codecogs.com/eqnedit.php?latex=h_{W,b}(x)\approx&space;x" target="_blank"><img src="https://latex.codecogs.com/gif.latex?h_{W,b}(x)\approx&space;x" title="h_{W,b}(x)\approx x" /></a>
+
+In simple term, the model will try to learn an approximation and recontruct the input _x_, where it has two functions during training of the model, namely the encode function 
+<a href="https://www.codecogs.com/eqnedit.php?latex=encode(x):&space;R^n&space;\rightarrow&space;R^d" target="_blank"><img src="https://latex.codecogs.com/gif.latex?encode(x):&space;R^n&space;\rightarrow&space;R^d" title="encode(x): R^n \rightarrow R^d" /></a> and the decode function <a href="https://www.codecogs.com/eqnedit.php?latex=decode(x):&space;R^d&space;\rightarrow&space;R^n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?decode(x):&space;R^d&space;\rightarrow&space;R^n" title="decode(x): R^d \rightarrow R^n" /></a> to find the representation of reconstruction.
+
+### Deep autoencoders with iterative refeeding feature 
+In this repository, we are particularly interested in the autoencoders that is proposed by the cool people from NVIDIA where they have come up with an elegant deep learning autoencoder architechture with iterative refeeding (Kuchaiev, O., and Ginsburg, B., 2017).
+
+Where their algorithm and refeeding steps can be defined as follows:
+
+i. Given Sparse _x_, compute loss with Masked Mean Squared Error,where the x equation can be defined as: <br/>
+<a href="https://www.codecogs.com/eqnedit.php?latex=MMSE&space;=&space;\frac{m_i&space;*&space;(r_i&space;-&space;y_i)}{\sum^{i=n}_{i=0}&space;m_i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?MMSE&space;=&space;\frac{m_i&space;*&space;(r_i&space;-&space;y_i)}{\sum^{i=n}_{i=0}&space;m_i}" title="MMSE = \frac{m_i * (r_i - y_i)}{\sum^{i=n}_{i=0} m_i}" /></a>, <br />
+where <a href="https://www.codecogs.com/eqnedit.php?latex=r_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r_i" title="r_i" /></a> is the actual rating and <a href="https://www.codecogs.com/eqnedit.php?latex=y_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?y_i" title="y_i" /></a> is the predicted ratings, <a href="https://www.codecogs.com/eqnedit.php?latex=m_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?m_i" title="m_i" /></a> is the masked ratings such that <a href="https://www.codecogs.com/eqnedit.php?latex=m_i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?m_i" title="m_i" /></a> = 1 if <a href="https://www.codecogs.com/eqnedit.php?latex=r_i&space;!=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r_i&space;!=&space;0" title="r_i != 0" /></a> else <a href="https://www.codecogs.com/eqnedit.php?latex=m_i&space;=&space;0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?m_i&space;=&space;0" title="m_i = 0" /></a>, and RMSE is just the square root of MMSE. 
+
+ii. Update weights with back propagation.
+
+iii. Reuse f(x) as new training example, and compute f(f(x)) with calculation of loss MMSE (refeeding feature). 
+
+iv. update weights with back propagation.
+
+Note that step 3 and step 4 can be performed multiple times during each iteration. 
+
+<b>For more information on the paper and the mentioned model, you may refer to their respective [Github Repository](https://github.com/NVIDIA/DeepRecommender).</b>
