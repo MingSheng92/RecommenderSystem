@@ -28,8 +28,26 @@ This time we will be looking at both NMF and autoencoders in collaborative filte
 
 To measure the performance of the algorithms, we decided to use the widely used evaluation metrics which are the Mean Absolute Error(MAE) and Root Mean Squared Error (RMSE). The defination of metrics is listed below:
 
- <a href="https://www.codecogs.com/eqnedit.php?latex=MAE&space;=&space;\frac{\sum_{(u,j)\in&space;E}&space;|e_{uj}|}{|E|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?MAE&space;=&space;\frac{\sum_{(u,j)\in&space;E}&space;|e_{uj}|}{|E|}" title="MAE = \frac{\sum_{(u,j)\in E} |e_{uj}|}{|E|}" /></a>
- 
+ <a href="https://www.codecogs.com/eqnedit.php?latex=MAE&space;=&space;\frac{\sum_{(u,j)\in&space;E}&space;|e_{uj}|}{|E|}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?MAE&space;=&space;\frac{\sum_{(u,j)\in&space;E}&space;|e_{uj}|}{|E|}" title="MAE = \frac{\sum_{(u,j)\in E} |e_{uj}|}{|E|}" /></a> , 
  <a href="https://www.codecogs.com/eqnedit.php?latex=RMSE&space;=&space;\sqrt{\frac{\sum_{(u,j)\in&space;E}&space;|e^2_{uj}|}{|E|}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?RMSE&space;=&space;\sqrt{\frac{\sum_{(u,j)\in&space;E}&space;|e^2_{uj}|}{|E|}}" title="RMSE = \sqrt{\frac{\sum_{(u,j)\in E} |e^2_{uj}|}{|E|}}" /></a>
  
- Even though there is much more different evaluation methods, we will only use the above two for now.
+Even though there is much more different evaluation methods, we will only use the above two for now.
+
+### SVD
+
+We have adopted the matrix factorization based algorithm (SVD), which is also equivalent to the probabilistic matrix factorization that has been proposed by(R.Salakhutdinov and A.Mnih.,2008). To predict the ratings of user to item i, we follow the equation that represents the relationship between average rating, user and item bias as well as the user and item interaction : 
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=R_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i&space;&plus;&space;q_i^TP_u" target="_blank"><img src="https://latex.codecogs.com/gif.latex?R_{ui}&space;=&space;\mu&space;&plus;&space;b_u&space;&plus;&space;b_i&space;&plus;&space;q_i^TP_u" title="R_{ui} = \mu + b_u + b_i + q_i^TP_u" /></a>
+
+Where 𝝁 is the average rating, & is the user and item biased from the bu and bi global average, while is the vector that associated with each item i and each i user u associated with vector Pu (Y. Koren, R. Bell, and C. Volinsky, 2009). To estimate the unknown ratings we also adopt the following regularized squared error: 
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=\sum_{r_{ui}&space;\in&space;R_{train}}&space;(R_{io}(True)&space;-&space;R_{ui})^2&space;&plus;&space;\lambda(b_i^2&space;&plus;&space;b_u^2&space;&plus;&space;\left&space;\|&space;q_i&space;\right&space;\|^2&space;&plus;&space;\left&space;\|&space;p_u&space;\right&space;\|^2)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sum_{r_{ui}&space;\in&space;R_{train}}&space;(R_{io}(True)&space;-&space;R_{ui})^2&space;&plus;&space;\lambda(b_i^2&space;&plus;&space;b_u^2&space;&plus;&space;\left&space;\|&space;q_i&space;\right&space;\|^2&space;&plus;&space;\left&space;\|&space;p_u&space;\right&space;\|^2)" title="\sum_{r_{ui} \in R_{train}} (R_{io}(True) - R_{ui})^2 + \lambda(b_i^2 + b_u^2 + \left \| q_i \right \|^2 + \left \| p_u \right \|^2)" /></a>
+
+Then the minimization is performed with the following stochastic gradient descent: 
+<a href="https://www.codecogs.com/eqnedit.php?latex=b_u&space;&\leftarrow&space;b_u&space;&&plus;&space;\gamma&space;(e_{ui}&space;-&space;\lambda&space;b_u)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b_u&space;&\leftarrow&space;b_u&space;&&plus;&space;\gamma&space;(e_{ui}&space;-&space;\lambda&space;b_u)" title="b_u &\leftarrow b_u &+ \gamma (e_{ui} - \lambda b_u)" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=b_i&space;&\leftarrow&space;b_i&space;&&plus;&space;\gamma&space;(e_{ui}&space;-&space;\lambda&space;b_i)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?b_i&space;&\leftarrow&space;b_i&space;&&plus;&space;\gamma&space;(e_{ui}&space;-&space;\lambda&space;b_i)" title="b_i &\leftarrow b_i &+ \gamma (e_{ui} - \lambda b_i)" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=p_u&space;&\leftarrow&space;p_u&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;q_i&space;-&space;\lambda&space;p_u)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p_u&space;&\leftarrow&space;p_u&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;q_i&space;-&space;\lambda&space;p_u)" title="p_u &\leftarrow p_u &+ \gamma (e_{ui} \cdot q_i - \lambda p_u)" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=q_i&space;&\leftarrow&space;q_i&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;p_u&space;-&space;\lambda&space;q_i)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?q_i&space;&\leftarrow&space;q_i&space;&&plus;&space;\gamma&space;(e_{ui}&space;\cdot&space;p_u&space;-&space;\lambda&space;q_i)" title="q_i &\leftarrow q_i &+ \gamma (e_{ui} \cdot p_u - \lambda q_i)" /></a>
