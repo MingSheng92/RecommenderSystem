@@ -91,3 +91,5 @@ So insted of generating user and item matrix and feed into model to learn and op
 <a href="https://www.codecogs.com/eqnedit.php?latex=L(x,&space;\hat&space;x)&space;&plus;&space;\lambda&space;\sum_i&space;a_i^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(x,&space;\hat&space;x)&space;&plus;&space;\lambda&space;\sum_i&space;a_i^2" title="L(x, \hat x) + \lambda \sum_i a_i^2" /></a>
 
 The final proposed model can be seen in the model below: 
+
+<img src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/test_keras_plot_model.png" data-canonical-src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/test_keras_plot_model.png" width="545" height="590" />
