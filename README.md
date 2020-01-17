@@ -93,3 +93,11 @@ So insted of generating user and item matrix and feed into model to learn and op
 The final proposed model can be seen in the model below: 
 
 <img src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/test_keras_plot_model.png" data-canonical-src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/test_keras_plot_model.png" width="545" height="590" />
+
+### Dataset
+
+As the topic of interest is around online shopping, we wish to use a dataset that is closely related to the subject hence the final dataset chosen is none other than the Amazon dataset (McAuley, J., 2016). Dataset is selected based on the following criteria, dataset size has to be resaonably large, so that we can better stimulate a close to real-world e commerce environment for our experiment. Second, we will check if the database has a basic e-commerce platform’s attributes such as product data, user’s implicit and explicit ratings.
+
+Other commonly used dataset for recommender system research includes, MovieLens (Grouplens, 2019), Brazillian E-Commerce Public Dataset by Olist(Kaggle, 2018), Netflix Prize dataset (Netflix, 2017), Retail rocket recommender system dataset (Retail rocket, 2017), Book-Crossing dataset (Cai-Nicolas, Z., 2004)
+
+
