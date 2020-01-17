@@ -100,4 +100,5 @@ As the topic of interest is around online shopping, we wish to use a dataset tha
 
 Other commonly used dataset for recommender system research includes, MovieLens (Grouplens, 2019), Brazillian E-Commerce Public Dataset by Olist(Kaggle, 2018), Netflix Prize dataset (Netflix, 2017), Retail rocket recommender system dataset (Retail rocket, 2017), Book-Crossing dataset (Cai-Nicolas, Z., 2004)
 
-
+### Result 
+<img src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/result.JPG" data-canonical-src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/result.JPG" width="424" height="107" />
