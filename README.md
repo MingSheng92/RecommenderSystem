@@ -81,3 +81,13 @@ iv. update weights with back propagation.
 Note that step 3 and step 4 can be performed multiple times during each iteration. 
 
 <b>For more information on the paper and the mentioned model, you may refer to their respective [Github Repository](https://github.com/NVIDIA/DeepRecommender).</b>
+
+### Deep Sparse autoencoders
+
+Though that the model has produced decent result, I do believed that it was not well optimized, where it is expected to converge to expected error when large amount of data is used for training according to large number law. Secondly, the user item matrix generation will be an issue as the items increase which results in highly dependent on hardware resources to train the model. With the sparsity rate of the dataset that we are using, the model will not converge well even with a custom loss function. On the other hand, another paper that has proposed a similar model structure has come to conclusion that iterative refeeding with not bring any significant impact to the performance of the model as shown in FlexEncoderr (Tran, D.H., Hussain, Z., Zhang, W.E., Khoa, N. et al. 2019).
+
+So insted of generating user and item matrix and feed into model to learn and optimize with custom loss function as mentioned earlier, we will use both user and item as embeddings then concatenate the two as new feature before feeding in back to the model. In order to further enforce the autoencoder to learn only the representation of the input data without redundancy in input, we will then apply regularization constraint to the autoencoder with L2 regularization, where the L2 term can be defined as below : 
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=L(x,&space;\hat&space;x)&space;&plus;&space;\lambda&space;\sum_i&space;a_i^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?L(x,&space;\hat&space;x)&space;&plus;&space;\lambda&space;\sum_i&space;a_i^2" title="L(x, \hat x) + \lambda \sum_i a_i^2" /></a>
+
+The final proposed model can be seen in the model below: 
