@@ -102,3 +102,5 @@ Other commonly used dataset for recommender system research includes, MovieLens 
 
 ### Result 
 <img src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/result.JPG" data-canonical-src="https://github.com/MingSheng92/RecommenderSystem/blob/master/img/result.JPG" width="424" height="107" />
+
+### Reference
