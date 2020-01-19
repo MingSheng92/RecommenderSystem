@@ -113,7 +113,7 @@ Even though our model could only achieve close comparable results to state-of-ar
 We could think our current model is a regression problem that our model will optimize on, if we think this as a binary classification problem and train the model similar to Neural Collaborative Filtering has done. Would be interesting to see how the model may work.
 
 2. Other autoencoders varient <br />
-Vanishing gradient is a common issue Would be interesting to see if we implement different autoencoders such as LSTM, RNN and VAE and compare the model with other state-of-art recommender system model.
+Vanishing gradient is a common issue in deep neural network, though this may not be affecting our model, it would be interesting to see if we implement different autoencoders such as LSTM, RNN and VAE and compare the model with other state-of-art recommender system model.
 
 3. data selection <br />
 With this experiment, we know that with extremely skewed data like the Amazon dataset the most model does not perform well, in early state of the experiment we have also experiment RBM but the end result was even worst compared to the base line autoencoder hence it was left out. From there it shows the common issue of RBM where it heavilly relies on feeding "good" data to train the model well. Hence in future work we could consider looking into different sampling methods when training the model, one that stands out is Monte Carlo sampling that may worth the time further investigating.
