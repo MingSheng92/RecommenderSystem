@@ -118,4 +118,7 @@ Vanishing gradient is a common issue in deep neural network, though this may not
 3. data selection <br />
 With this experiment, we know that with extremely skewed data like the Amazon dataset the most model does not perform well, in early state of the experiment we have also experiment RBM but the end result was even worst compared to the base line autoencoder hence it was left out. From there it shows the common issue of RBM where it heavilly relies on feeding "good" data to train the model well. Hence in future work we could consider looking into different sampling methods when training the model, one that stands out is Monte Carlo sampling that may worth the time further investigating.
 
+4. Live Testing <br />
+Since the model is production ready we can host it on GCP (Google Cloud Platfrom) and potentiially use it and a serverless function. By doing this, we can run liive user test with our model for further evaluation.
+
 ### Reference
